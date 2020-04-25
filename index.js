@@ -18,8 +18,26 @@ const questions = [
         },
         {
           type: "input",
-          message: "How many repos should go on this page?",
-          name: "repoCount"
+          message: "What is the title of your project?",
+          name: "title"
+        },
+
+        {
+          type: "input",
+          message: "Description of project:",
+          name: "desctiption"
+        },
+
+        {
+          type: "input",
+          message: "Table of contents?",
+          name: "contents"
+        },
+
+        {
+          type: "input",
+          message: "?",
+          name: "install"
         }
 
 ];
