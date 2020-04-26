@@ -155,6 +155,19 @@ const genMarkdown = (data, image, email) => {
 
 // // -- This is a fairly common programming construct. They are just giving us a FUNCTION to INITIALIZE or SETUP our project parameter. It's also where we usually kick off our project flow -- //
 
-
+async function init() {
+    console.log("Generating README")
+    try {
+      const data = await questions();
+      const response =  await getInfo(data);
+      const writeMarkdown =  genMarkdown(data,response.data.avatar_url,response.data.html_url);
+  
+      await writeFileAsync("README.md", writeMarkdown);
+      console.log("Successfully wrote to README.md");
+    } 
+    catch(err) {
+      console.log(err);
+    }
+  }
 // -- We DEFINED our INITALIZATION FUNCTION above, here we are just kicking off (running) our program. -- // 
 init();
