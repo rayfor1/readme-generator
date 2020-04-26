@@ -104,70 +104,57 @@ return inquirer.prompt ([
         //         console.log("Success!");
         //         }   
         //     )}
-let getName = (data) => {
-    let queryUrl = `https://api.github.com/users/${data.username}`;
-    return axios.get(queryUrl)
+    let getInfo = (data) => {
+        let queryUrl = `https://api.github.com/users/${data.username}`;
+        return axios.get(queryUrl)
+    
 }
 
-// }
-const generateMarkdown = (data, image, email) => {
+
+const genMarkdown = (data, image, email) => {
     console.log(data)
     return `
-# ${data.title}
-![Github license](https://img.shields.io/badge/license-MIT-blue.svg)
+        # ${data.title}
+        ![Github license](https://img.shields.io/badge/license-MIT-blue.svg)
 
-## Description
-  ${data.description}
+        ## Description
+        ${data.description}
 
-## Table of Contents
-  *[Installation](#installation)
-  *[Usage](#usage)
-  *[License](#license)
-  *[Contributing](#contributing)
-  *[Tests](#tests)
-  *[Questions](#questions)
-  
-## Installation
-To install any necessary dependencies, run the following command:
-    ${data.installation}
+        ## Table of Contents:
+        *[Installation](#installation)
+        *[Usage](#usage)
+        *[License](#license)
+        *[Contributing](#contributing)
+        *[Tests](#tests)
+        *[Questions](#questions)
+        
+        ## Installation
+        To install any necessary dependencies, run the following command:
+            ${data.installation}
 
-## Usage
-${data.usage}
+        ## Usage
+        ${data.usage}
 
-## License
-This project is licensed under the ${data.license} license.
+        ## License
+        This project is licensed under the ${data.license} license.
 
-## Contributing
-${data.contributing}
+        ## Contributing
+        ${data.contributing}
 
-## Tests
-To run any tests, run the following command:
-    ${data.tests}
+        ## Tests
+        To run any tests, run the following command:
+            ${data.tests}
 
-## Questions
-<img src="${image}" alt="avatar" style="border-radius: 14px" width="40"/>
-If you have any questions about the repo, open an issue or contact me at: 
-${data.email} [${data.username}] 
-  `
+        ## Questions
+        <img src="${image}" alt="avatar" style="border-radius: 14px" width="40"/>
+        If you have any questions about the repo, open an issue or contact me at: 
+        ${data.email} [${data.username}] 
+    `
 };
 
 
 // // -- This is a fairly common programming construct. They are just giving us a FUNCTION to INITIALIZE or SETUP our project parameter. It's also where we usually kick off our project flow -- //
-  async function init() {
-  console.log("Generating README")
-  try {
-     
-    const data = await questions();
-    const response =  await getName(data);
-    const md =  generateMarkdown(data,response.data.avatar_url,response.data.html_url);
 
-    await writeFileAsync("README_gen.md", md);
-
-    console.log("Successfully wrote to README_gen.md");
-  } catch(err) {
-    console.log(err);
-  }
-}
 
 // -- We DEFINED our INITALIZATION FUNCTION above, here we are just kicking off (running) our program. -- // 
 init();

@@ -1,11 +1,11 @@
 
-# Readme generator
+# project
 ![Github license](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ## Description
-  assignment to create a readme generator
+  homework
 
-## Table of Contents:
+## Table of Contents
   *[Installation](#installation)
   *[Usage](#usage)
   *[License](#license)
@@ -15,23 +15,23 @@
   
 ## Installation
 To install any necessary dependencies, run the following command:
-    npm inquirer, axios, util, and fs
+    none
 
 ## Usage
-this was har
+a lot
 
 ## License
-This project is licensed under the MIT license.
+This project is licensed under the mit license.
 
 ## Contributing
-none
+idl
 
 ## Tests
 To run any tests, run the following command:
-    none
+    idk
 
 ## Questions
 <img src="https://avatars3.githubusercontent.com/u/19982327?v=4" alt="avatar" style="border-radius: 14px" width="40"/>
 If you have any questions about the repo, open an issue or contact me at: 
-anuforo@gmail.com [rayfor1] 
+rayfor@gmail.com [rayfor1] 
   
