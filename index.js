@@ -1,16 +1,194 @@
+// const inquirer = require("inquirer");
+// const axios = require("axios");
+// const util = require("util")
+// const fs = require("fs");
+
+
+// // -- They give us an ARRAY called 'questions' What could we do with this (?) -- //
+
+// function questions(){
+// inquirer.prompt([
+//         {
+//             type: "input",
+//             message: "What is your name:",
+//             name: "name"
+//         },
+//         {
+//             type: "input",
+//             message: "What is your github username?",
+//             name: "username"
+//         },
+//         {
+//             type: "input",
+//             message: "What is the title of your project?",
+//             name: "title"
+//         },
+
+//         {
+//             type: "input",
+//             message: "Give a description of the project:",
+//             name: "desctiption"
+//         },
+
+//         {
+//             type: "input",
+//             message: "Table of contents:",
+//             name: "contents"
+//         },
+
+//         {
+//             type: "input",
+//             message: "What command should be used to install any additional dependencies?",
+//             name: "installation"
+//         },
+
+//         {
+//             type: "input",
+//             message: "Any additional info for the user to know about the repo?",
+//             name: "usage"
+//         },
+
+//         {
+//             type: "input",
+//             message: "What type of licence should the project have?",
+//             name: "contributing"
+//         },
+
+//         {
+//             type: "input",
+//             message: "Any additional info for the user to know about contributing to the repo?",
+//             name: "contributing"
+//         },
+
+//         {
+//             type: "input",
+//             message: "What command should be used to run tests?",
+//             name: "tests"
+//         },
+
+//         // {
+//         //     type: "input",
+//         //     message: "Any additional questions?",
+//         //     name: "question"
+//         // },
+
+//     ])
+//     .then(data => {
+//         let text = data.name;
+//         text = text + data.data;
+//         text = text + data.username;
+//         text = text + data.description;
+//         text = text + data.contents;
+//         text = text + data.installation;
+//         text = text + data.usage;
+//         text = text + data.contributing;
+//         text = text + data.test;
+
+//         fs.writeFile("readme_gen.md", text, function(err){
+//             if(err){
+//                 console.log("There is an error");
+//             }
+//             console.log("Success!");
+//         }   
+//     )}
+// )}
+// var getName = (data) => {
+//     var queryUrl = `https://api.github.com/users/${data.username}`;
+//     return axios.get(queryUrl);
+// }
+
+
+// const generateMarkdown = (data, image, email) => {
+//     console.log(data);
+//         return `
+//         # ${data.title}
+//         ![Github license](https://img.shields.io/badge/license-MIT-blue.svg)
+//         ## Description
+//         ${data.description}
+//         ## Table of Contents
+//         *[Installation](#installation)
+//         *[Usage](#usage)
+//         *[License](#license)
+//         *[Contributing](#contributing)
+//         *[Tests](#tests)
+//         *[Questions](#questions)
+        
+//         ## Installation
+//         To install necessary dependencies, run the following command:
+//             ${data.installation}
+//         ## Usage
+//         ${data.usage}
+//         ## License
+//         This project is licensed under the ${data.usage} license.
+//         ## Contributing
+//         ${data.contributing}
+//         ## Tests
+//         To run tests, run the following command:
+//             ${data.tests}
+//         ## Questions
+//         <img src="${image}" alt="avatar" style="border-radius: 16px" width="30"/>
+//         If you have any questions about the repo, open an issue or contact@
+//         [${data.username}]${email}
+//         `
+// };
+
+
+// async function init() {
+//     console.log("Generating README")
+//     try {
+       
+//       const data = await questions();
+  
+//       const res =  await getName(data);
+  
+//       const md =  generateMarkdown(data,res.data.avatar_url,res.data.html_url);
+  
+//       await writeFileAsync("readme_gen.md", md);
+  
+//       console.log("Successfully wrote to README.md");
+//     } catch(err) {
+//       console.log(err);
+//     }
+//   }
+  
+
+// init();
+
+// // -- They give us a writeToFile() FUNCTION, Looks like we may need to read/write to a file. What BUILT-IN node module will help us out with this (?) -- // 
+// function writeToFile(fileName, data) {
+
+// }
+
+// // -- This is a fairly common programming construct. They are just giving us a FUNCTION to INITIALIZE or SETUP our project parameter. It's also where we usually kick off our project flow -- //
+// function init() {
+
+// }
+
+// // -- We DEFINED our INITALIZATION FUNCTION above, here we are just kicking off (running) our program. -- // 
+// init();
+
+
 const inquirer = require("inquirer");
 const axios = require("axios");
+const util = require("util")
 const fs = require("fs");
 
+const writeFileAsync = util.promisify(fs.writeFile)
 
-// -- They give us an ARRAY called 'questions' What could we do with this (?) -- //
 
-function questions () {
-    return inquirer.prompt([
+// // -- They give us an ARRAY called 'questions' What could we do with this (?) -- //
+
+function questions() {
+return inquirer.prompt ([
         {
             type: "input",
             message: "What is your name:",
             name: "name"
+        },
+        {
+            type: "input",
+            message: "What is your e-mail address?",
+            name: "email"
         },
         {
             type: "input",
@@ -25,8 +203,8 @@ function questions () {
 
         {
             type: "input",
-            message: "Give a cescription of the project:",
-            name: "desctiption"
+            message: "Give a description of the project:",
+            name: "description"
         },
 
         {
@@ -37,7 +215,7 @@ function questions () {
 
         {
             type: "input",
-            message: "?",
+            message: "What command should be used to install any additional dependencies?",
             name: "installation"
         },
 
@@ -49,8 +227,8 @@ function questions () {
 
         {
             type: "input",
-            message: "What type of licence should the project have?",
-            name: "contributing"
+            message: "What type of license should the project have?",
+            name: "license"
         },
 
         {
@@ -70,37 +248,28 @@ function questions () {
         //     message: "Any additional questions?",
         //     name: "question"
         // },
+]}
+    ]).then(data => {
+        let text = data.name;
+        text = text + data.data;
+        text = text + data.username;
+        text = text + data.description;
+        text = text + data.contents;
+        text = text + data.installation;
+        text = text + data.usage;
+        text = text + data.contributing;
+        text = text + data.test;
+    })
+};
 
-    ])
-    .then(response => {
-        let text = response.name;
-        text = text + response.data;
-        text = text + response.username;
-        text = text + response.description;
-        text = text + response.contents;
-        text = text + response.installation;
-        text = text + response.usage;
-        text = text + response.contributing;
-        text = text + response.tets;
-
-        fs.writeFile("readme_gen.md", text, function(err){
-            if(err){
-                console.log("There is an error");
-            }
-            console.log("Success!");
-        }   
-    )}
-)}
-
-// -- They give us a writeToFile() FUNCTION, Looks like we may need to read/write to a file. What BUILT-IN node module will help us out with this (?) -- // 
-function writeToFile(fileName, data) {
-
+var getName = (data) => {
+    var queryUrl = `https://api.github.com/users/${data.username}`;
+    return axios.get(queryUrl)
 }
 
-// -- This is a fairly common programming construct. They are just giving us a FUNCTION to INITIALIZE or SETUP our project parameter. It's also where we usually kick off our project flow -- //
-function init() {
 
-}
+const generateMarkdown = (data, image, email) => {
+    console.log(data)
+    return 
 
-// -- We DEFINED our INITALIZATION FUNCTION above, here we are just kicking off (running) our program. -- // 
 init();
